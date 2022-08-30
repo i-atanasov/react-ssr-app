@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import express from "express";
 import fs from 'fs';
 import path from "path";
@@ -23,3 +24,11 @@ app.use('^/$', (req, res, next) => {
 app.use(express.static(path.resolve(__dirname, '..', 'build')))
 
 app.listen(port, (console.log(`App launched at port ${port}`)))
+=======
+import { Express } from "express";
+
+const app = Express();
+app.use('^/$', (req, res, next) => {
+    
+})
+>>>>>>> 27490febbe92ff3a4d09d86dd12181121dbb2226
