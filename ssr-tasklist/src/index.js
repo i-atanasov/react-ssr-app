@@ -5,6 +5,6 @@ import App from './components/App';
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 
-root.render(
+root.hydrate(
         <App />
     );
