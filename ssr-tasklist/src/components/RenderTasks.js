@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 const RenderTasks = (props) => {
     const tasks = props.tasks;

@@ -1,9 +1,6 @@
 import React from 'react';
-//import ReactDOM from 'react-dom';
 
 import RenderTasks from './RenderTasks';
-
-
 
 class App extends React.Component {
   state = { tasks: [] };

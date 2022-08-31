@@ -15,7 +15,12 @@ app.use('^/$', (req, res, next) => {
             console.log(err);
             return res.status(500).send('There was and error')
         }  
-        return res.send(data.replace("<div id='root'></div>", `<div id='root'>${ReactDOMServer.renderToString(<App />)}</div>`))
+        return res.send(
+            data.replace(
+                "<div id='root'></div>",
+                `<div id='root'>${ReactDOMServer.renderToString(<App />)}</div>`
+            )
+        )
 
     })
 })
@@ -24,6 +29,3 @@ app.use(express.static(path.resolve(__dirname, '..', 'build')))
 
 app.listen(port, (console.log(`App launched at port ${port}`)))
 
-app.use('^/$', (req, res, next) => {
-    
-})
