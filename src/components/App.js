@@ -16,6 +16,10 @@ const App = () => {
             return res.json()
           }
         })
+        .catch(error => {
+          document.querySelector("#root").parentElement.innerHTML = `Error: ${error}`;
+          console.error('There was an error!', error);
+        })
 
       setTask(data.Items)
     }
