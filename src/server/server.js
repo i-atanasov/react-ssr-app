@@ -49,6 +49,7 @@ app.use('/tasks', (req, res) => {
     })
 
 
+
 app.use(express.static(path.resolve(__dirname, '../../', 'build')))
 
 app.listen(port, (console.log(`App launched at port ${port}`)))

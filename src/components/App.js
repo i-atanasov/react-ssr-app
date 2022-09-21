@@ -10,7 +10,7 @@ const App = () => {
       const data = await fetch('http://localhost:3080/tasks')
         .then(res => { return res.json() })
 
-      setTask(data)
+      setTask(data.Items)
     }
 
     getTasks();
