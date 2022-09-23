@@ -11,32 +11,21 @@ function TaskForm(props) {
         );
       };
     
-    //   const renderTextArea = ({ input, label }) => {
-    //     return (
-    //       <div className="field">
-    //         <label>{label}</label>
-    //         <textarea {...input} />
-    //       </div>
-    //     );
-    //   };
      
       const onSubmit = (formValues) => {
-        props.onSubmit(formValues);
+        console.log(formValues)
       };
      
       return (
         <Form
-          initialValues={props.initialValues}
+          // prep for edit option
+          //initialValues={props.initialValues}
           onSubmit={onSubmit}
           validate={(formValues) => {
             const errors = {};
      
-            if (!formValues.title) {
-              errors.title = "You must enter a title";
-            }
-     
-            if (!formValues.author) {
-              errors.author = "You must enter an author";
+            if (!formValues.topic) {
+              errors.title = "You must enter a topic";
             }
      
             return errors;
@@ -44,7 +33,7 @@ function TaskForm(props) {
           render={({ handleSubmit }) => (
             <form onSubmit={handleSubmit} className="ui form error">
                 <div className="ui container">
-                    <h3>{props.title}</h3>
+                    {/* <h3>{props.topic}</h3> */}
                     <Field name="topic" component={renderInput} label="Enter topic:" />
                     <Field
                         name="results"
