@@ -18,10 +18,7 @@ const RenderTasks = (props) => {
                             Apr. duration: {currentTask.duration}<br />
                         </div>
                         <div className="">
-                            Resourses: To be rendered  <br />
-                        </div>
-                        <div className="">
-                            Goal: {currentTask.results}  <br />
+                            Results: {currentTask.results}  <br />
                         </div>
                         <br />
                         <hr></hr>

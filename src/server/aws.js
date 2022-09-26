@@ -1,21 +1,22 @@
 
 import AWS from 'aws-sdk';
+import { DeleteItemCommand } from '@aws-sdk/client-dynamodb';
 
 class DynamoDBHangler {
   constructor() {
     this.dynamodb = new AWS.DynamoDB.DocumentClient({ region: 'eu-west-2' });
+    this.tableName = 'tasklist'
   }
 
   getTasks = async () => {
     var params = {
-      TableName: 'tasklist'
+      TableName: this.tableName
     };
-   
-    try {  
+
+    try {
       let result = await this.dynamodb
         .scan(params)
         .promise();
-      //console.log(result)  
       return result;
     }
     catch (error) {
@@ -23,19 +24,56 @@ class DynamoDBHangler {
     }
   }
 
-  // addTask = async () => {
-    // dynamodb.put({
-    //   TableName: tableName,
-    //   Item: {
-    //     id: id,
-    //     topic: topic,
-    //     duration: days,
-    //     completed: false
-    //   }
-    // }, (err, data) => console.log("Success"))
-  // }
-  
+  addTask = async (formValues) => {
+    const { topic, results, duration, completed } = formValues;
+    
+    this.dynamodb.put({
+      TableName: this.tableName,
+      Item: {
+        id: Number(Date.now()),
+        topic: topic || "no topic",
+        results: results || "no expected result",
+        duration: Number(duration) || 0,
+        completed: completed
+      }
+    }, (err) => console.log(err))
+    this.getTasks()
   }
+
+  deleteTask = async (id) => {
+    try {
+      await this.dynamodb.send(new DeleteItemCommand({
+        TableName: this.tableName,
+        Item: {
+          id: id
+        }
+      })
+      )
+      console.log('deleted')
+    } catch (err) {
+      console.log("Error", err);
+    }
+  }
+
+  updateTask = async (formValues) => {
+    const { topic, results, duration, completed } = formValues;
+
+    try {
+      this.dynamodb.put({
+        TableName: this.tableName,
+        Item: {
+          id: Number(Date.now()),
+          topic: topic || "no topic",
+          results: results || "no expected result",
+          duration: Number(duration) || 0,
+          completed: completed
+        }
+      })
+    } catch (err) {
+      console.log('Check input', err)
+    }
+  }
+}
 
 const DynamoDBInstance = new DynamoDBHangler();
 

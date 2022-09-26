@@ -8,7 +8,7 @@ const App = () => {
 
   useEffect(() => {
     const getTasks = async () => {
-      const data = await fetch('http://localhost:3080/tasks')
+      const data = await fetch('http://localhost:3080/tasks', { method: 'GET' })
         .then(res => {
           if (!res.ok) {
             throw Error(res.statusText)
