@@ -29,12 +29,12 @@ const App = () => {
   }, []);
 
   return (
-    <div className="ui container">
-      <h1 >Add Task</h1>
-      <TaskForm />
-      <h1>FT Onboarding</h1>
-      <RenderTasks tasks={tasks} />
-    </div>
+      <div className="ui container">
+        <h1 >Add Task</h1>
+        <TaskForm />
+        <h1>FT Onboarding</h1>
+        <RenderTasks tasks={tasks} />
+      </div>
   );
 }
 
