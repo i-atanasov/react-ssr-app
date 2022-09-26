@@ -7,10 +7,10 @@ const RenderTasks = (props) => {
     const renderAdminButtons = (id) => {
         return (
             <div className="right floated content" style={{ "marginTop": "10px" }}>
-                <Link className="ui inverted secondary button" to={`/books/edit/${id}`}>
+                <Link className="ui inverted green button" to={`/task/edit/${id}`}>
                     <i className="ui edit icon"></i>Edit
                 </Link>
-                <Link className="ui inverted red button" to={`/books/delete/${id}`}>
+                <Link className="ui inverted red button" to={`/task/delete/${id}`}>
                     <i className="ui delete icon"></i>Delete
                 </Link>
             </div>
