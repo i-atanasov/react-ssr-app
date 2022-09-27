@@ -1,5 +1,5 @@
 import express from "express";
-import fs from 'fs';
+//import fs from 'fs';
 import path from "path";
 //import { env } from "process";
 const cors = require('cors')
@@ -7,7 +7,7 @@ import * as ReactDOMServer from 'react-dom/server'
 import React from 'react'
 
 import DynamoDBInstance from "./aws";
-import App from "../components/App";
+//import App from "../components/App";
 
 const port = 3080;
 const app = express();
@@ -33,20 +33,23 @@ app.get('/tasks', (req, res) => {
         })()
     })
 
+app.post('/', (req, res) => {
+    const formValues = req.body.formValues;
+    (async () => {
+        await DynamoDBInstance.addTask(formValues);
+    })()
+    if (!formValues) {
+        return res.status(400).send({ request: 'failed' })
+    }
+    res.status(200).send({ request: 'successful' })
+})
 
-    app.post('/', (req, res) => {
-        const formValues = req.body.formValues;
-        //console.log(formValues)
-        (async () => {
-            await DynamoDBInstance.addTask(formValues);
-        })()
-        if (!formValues) {
-            return res.status(400).send({ request: 'failed' })
-        }
-        res.status(200).send({ request: 'successful' })
-    })
-
-
+app.delete('/task/delete/:id/duration/:duration', (req, res) => {
+    let {id, duration} = req.params
+    //console.log(id, duration)
+    // DynamoDBHandler.createInstance()
+    DynamoDBInstance.deleteTask(id, duration);
+})
 
 app.listen(port, (console.log(`App launched at port ${port}`)))
 
