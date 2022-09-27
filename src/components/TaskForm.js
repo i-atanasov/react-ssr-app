@@ -3,7 +3,7 @@ import { Form, Field } from 'react-final-form'
 function TaskForm(props) {
 
 
-      const renderInput = ({ input, label, meta }) => {
+      const renderInput = ({ input, label }) => {
         //err menagement?
         const className = `field`;
         return (
@@ -16,7 +16,7 @@ function TaskForm(props) {
     
      
       const onSubmit = async (formValues) => {
-        console.log(formValues)
+        //console.log(formValues)
         const res = await fetch('http://localhost:3080/', {
           method: "POST",
           headers: {

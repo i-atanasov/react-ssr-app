@@ -5,6 +5,7 @@ import TaskForm from "./TaskForm";
 
 const App = () => {
   const [tasks, setTask] = useState([])
+  const [initialValues, setInitialValues] = useState([])
 
   useEffect(() => {
     const getTasks = async () => {
@@ -28,12 +29,17 @@ const App = () => {
       .catch(console.error);
   }, []);
 
+  const handleEdit = (id) => {
+    const taskEdit = tasks.filter(task => task.id == id)
+    return setInitialValues(taskEdit[0])
+  }
+
   return (
       <div className="ui container">
         <h1 >Add Task</h1>
-        <TaskForm />
+        <TaskForm initialValues={initialValues}/>
         <h1>FT Onboarding</h1>
-        <RenderTasks tasks={tasks} />
+        <RenderTasks tasks={tasks} handleEdit={handleEdit}/>
       </div>
   );
 }

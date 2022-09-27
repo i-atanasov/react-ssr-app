@@ -1,12 +1,21 @@
-
 import AWS from 'aws-sdk';
-import { DeleteItemCommand } from '@aws-sdk/client-dynamodb';
 
-class DynamoDBHangler {
+class DynamoDBHandler {
+  
   constructor() {
     this.dynamodb = new AWS.DynamoDB.DocumentClient({ region: 'eu-west-2' });
     this.tableName = 'tasklist'
   }
+
+  // static createInstance() {
+  //   if (!this.#hasInstance()) {
+  //     this.dynamodb = new AWS.DynamoDB.DocumentClient({ region: 'eu-west-2' });
+  //   } 
+  // }
+
+  // #hasInstance() {
+  //   return !!this.dynamodb
+  // }
 
   getTasks = async () => {
     var params = {
@@ -40,19 +49,27 @@ class DynamoDBHangler {
     this.getTasks()
   }
 
-  deleteTask = async (id) => {
-    try {
-      await this.dynamodb.send(new DeleteItemCommand({
+  deleteTask = (id, duration) => {
+      const params = {
         TableName: this.tableName,
-        Item: {
-          id: id
+        Key: {
+          id: Number(id), 
+          duration: Number(duration)
         }
-      })
-      )
-      console.log('deleted')
-    } catch (err) {
-      console.log("Error", err);
-    }
+      }
+
+      this.dynamodb.delete(params, (err, res) => {
+        if (err) {
+          console.error(err);
+          // callback(null, {
+          //   statusCode: err.statusCode,
+          //   body: JSON.stringify(err),
+          // });
+          return;
+        } else {
+          console.log(res);
+        }
+      });
   }
 
   updateTask = async (formValues) => {
@@ -75,7 +92,7 @@ class DynamoDBHangler {
   }
 }
 
-const DynamoDBInstance = new DynamoDBHangler();
+const DynamoDBInstance = new DynamoDBHandler();
 
 Object.freeze(DynamoDBInstance);
 export default DynamoDBInstance;
