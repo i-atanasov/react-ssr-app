@@ -16,16 +16,27 @@ function TaskForm(props) {
     
      
       const onSubmit = async (formValues) => {
-        //console.log(formValues)
-        const res = await fetch('http://localhost:3080/', {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            formValues
+        if (!formValues.id) {
+          const res = await fetch('http://localhost:3080/', {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              formValues
+            })
           })
-        })
+        } else {
+          const res = await fetch(`http://localhost:3080/update`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              formValues
+            })
+          })
+        }
       };
      
       return (

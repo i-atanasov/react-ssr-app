@@ -36,7 +36,7 @@ class DynamoDBHandler {
   addTask = async (formValues) => {
     const { topic, results, duration, completed } = formValues;
     
-    this.dynamodb.put({
+    await this.dynamodb.put({
       TableName: this.tableName,
       Item: {
         id: Number(Date.now()),
@@ -45,8 +45,8 @@ class DynamoDBHandler {
         duration: Number(duration) || 0,
         completed: completed
       }
-    }, (err) => console.log(err))
-    this.getTasks()
+    }, (err) => console.log(err)).promise();
+    //this.getTasks()
   }
 
   deleteTask = (id, duration) => {
@@ -61,10 +61,6 @@ class DynamoDBHandler {
       this.dynamodb.delete(params, (err, res) => {
         if (err) {
           console.error(err);
-          // callback(null, {
-          //   statusCode: err.statusCode,
-          //   body: JSON.stringify(err),
-          // });
           return;
         } else {
           console.log(res);
@@ -73,24 +69,28 @@ class DynamoDBHandler {
   }
 
   updateTask = async (formValues) => {
-    const { topic, results, duration, completed } = formValues;
-
-    try {
-      this.dynamodb.put({
-        TableName: this.tableName,
-        Item: {
-          id: Number(Date.now()),
-          topic: topic || "no topic",
-          results: results || "no expected result",
-          duration: Number(duration) || 0,
-          completed: completed
+    const { id, topic, results, duration, completed } = formValues;
+    const params = {
+      TableName: this.tableName,
+      Item: {
+        id: id,
+        topic: topic || "no topic",
+        results: results || "no expected result",
+        duration: Number(duration) || 0,
+        completed: completed
+      },
+    }
+  
+     await this.dynamodb.put(params, (err, res) => {
+        if (err) {
+          console.error(err);
+          return;
+        } else {
+          console.log(res);
         }
-      })
-    } catch (err) {
-      console.log('Check input', err)
+      }).promise();
     }
   }
-}
 
 const DynamoDBInstance = new DynamoDBHandler();
 

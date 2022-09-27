@@ -46,9 +46,17 @@ app.post('/', (req, res) => {
 
 app.delete('/task/delete/:id/duration/:duration', (req, res) => {
     let {id, duration} = req.params
-    //console.log(id, duration)
     // DynamoDBHandler.createInstance()
     DynamoDBInstance.deleteTask(id, duration);
+})
+
+app.post('/update', (req, res) => {
+    const formValues = req.body.formValues;
+    DynamoDBInstance.updateTask(formValues)
+    if (!formValues) {
+        return res.status(400).send({ request: 'failed' })
+    }
+    res.status(200).send({ request: '' })
 })
 
 app.listen(port, (console.log(`App launched at port ${port}`)))
