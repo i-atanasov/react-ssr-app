@@ -1,7 +1,6 @@
 import express from "express";
 //import fs from 'fs';
 import path from "path";
-//import { env } from "process";
 const cors = require('cors')
 import * as ReactDOMServer from 'react-dom/server'
 import React from 'react'
@@ -44,10 +43,10 @@ app.post('/', (req, res) => {
     res.status(200).send({ request: 'successful' })
 })
 
-app.delete('/task/delete/:id/duration/:duration', (req, res) => {
-    let {id, duration} = req.params
+app.delete('/task/delete/:id', (req, res) => {
+    let {id} = req.params
     // DynamoDBHandler.createInstance()
-    DynamoDBInstance.deleteTask(id, duration);
+    DynamoDBInstance.deleteTask(id);
 })
 
 app.post('/update', (req, res) => {

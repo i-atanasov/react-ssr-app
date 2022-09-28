@@ -4,8 +4,9 @@ import RenderTasks from "./RenderTasks";
 import TaskForm from "./TaskForm";
 
 const App = () => {
-  const [tasks, setTask] = useState([])
+  const [tasks, setTasks] = useState([])
   const [initialValues, setInitialValues] = useState([])
+  const [update, hasUpdated] = useState([0])
 
   useEffect(() => {
     const getTasks = async () => {
@@ -22,12 +23,12 @@ const App = () => {
           console.error('There was an error!', error);
         })
 
-      setTask(data.Items)
+      setTasks(data.Items)
     }
 
     getTasks()
       .catch(console.error);
-  }, []);
+  }, [update]);
 
   const handleEdit = (id) => {
     const taskEdit = tasks.filter(task => task.id == id)
@@ -37,9 +38,9 @@ const App = () => {
   return (
       <div className="ui container">
         <h1 >Add Task</h1>
-        <TaskForm initialValues={initialValues}/>
+        <TaskForm hasUpdated={hasUpdated} initialValues={initialValues} setInitialValues={setInitialValues} />
         <h1>FT Onboarding</h1>
-        <RenderTasks tasks={tasks} handleEdit={handleEdit}/>
+        <RenderTasks tasks={tasks} hasUpdated={hasUpdated} handleEdit={handleEdit}/>
       </div>
   );
 }

@@ -7,9 +7,11 @@ const RenderTasks = (props) => {
         props.handleEdit(id)
     }
     
-    const deleteTask = async (id, duration) => {
-        await fetch(`http://localhost:3080/task/delete/${id}/duration/${duration}`, { method: 'DELETE' })
-            .then(response => response.json());
+    const deleteTask = async (id) => {
+        await fetch(`http://localhost:3080/task/delete/${id}`, { method: 'DELETE' })
+            .then(response => {response.json();   
+            })
+            .then(props.hasUpdated([1]));
     }
 
     const renderAdminButtons = (id, duration) => {
@@ -18,7 +20,7 @@ const RenderTasks = (props) => {
                 <button className="ui inverted green button" onClick={() => editTask(id)}>
                     <i className="ui edit icon"></i>Edit
                 </button>
-                <button className="ui inverted red button" onClick={() => deleteTask(id, duration)}>
+                <button className="ui inverted red button" onClick={() => deleteTask(id)}>
                     <i className="ui delete icon"></i>Delete
                 </button>
             </div>

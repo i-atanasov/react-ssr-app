@@ -1,8 +1,6 @@
 import { Form, Field } from 'react-final-form'
 
 function TaskForm(props) {
-
-
       const renderInput = ({ input, label }) => {
         //err menagement?
         const className = `field`;
@@ -13,7 +11,14 @@ function TaskForm(props) {
           </div>
         );
       };
-    
+
+      const updateParent = () => {
+        setTimeout(() => {
+          props.hasUpdated([1])
+          props.setInitialValues({completed: false, duration: 0})
+        }, 500)
+        
+      }
      
       const onSubmit = async (formValues) => {
         if (!formValues.id) {
@@ -25,7 +30,7 @@ function TaskForm(props) {
             body: JSON.stringify({
               formValues
             })
-          })
+          }).then(updateParent())
         } else {
           const res = await fetch(`http://localhost:3080/update`, {
             method: "POST",
@@ -35,7 +40,7 @@ function TaskForm(props) {
             body: JSON.stringify({
               formValues
             })
-          })
+          }).then(updateParent())
         }
       };
      

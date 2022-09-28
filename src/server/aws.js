@@ -1,4 +1,5 @@
 import AWS from 'aws-sdk';
+//require('dotenv').config();
 
 class DynamoDBHandler {
   
@@ -46,15 +47,13 @@ class DynamoDBHandler {
         completed: completed
       }
     }, (err) => console.log(err)).promise();
-    //this.getTasks()
   }
 
-  deleteTask = (id, duration) => {
+  deleteTask = (id) => {
       const params = {
         TableName: this.tableName,
         Key: {
-          id: Number(id), 
-          duration: Number(duration)
+          id: Number(id)
         }
       }
 
@@ -62,8 +61,6 @@ class DynamoDBHandler {
         if (err) {
           console.error(err);
           return;
-        } else {
-          console.log(res);
         }
       });
   }
@@ -85,8 +82,6 @@ class DynamoDBHandler {
         if (err) {
           console.error(err);
           return;
-        } else {
-          console.log(res);
         }
       }).promise();
     }
