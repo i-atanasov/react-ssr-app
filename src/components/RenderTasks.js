@@ -14,7 +14,7 @@ const RenderTasks = (props) => {
             .then(props.hasUpdated([1]));
     }
 
-    const renderAdminButtons = (id, duration) => {
+    const renderAdminButtons = (id) => {
         return (
             <div className="right floated content" style={{ "marginTop": "10px" }}>
                 <button className="ui inverted green button" onClick={() => editTask(id)}>
@@ -35,7 +35,7 @@ const RenderTasks = (props) => {
             return (
                 <div key={currentTask.id} className="ui relaxed container raised list segment" style={{ "borderRight": `5px solid ${done}` }}>
                     <div className="item">
-                        <div>{renderAdminButtons(currentTask.id, currentTask.duration)}</div>
+                        <div>{renderAdminButtons(currentTask.id)}</div>
                         <div className="content">
                             <div>
                                 {currentTask.type}

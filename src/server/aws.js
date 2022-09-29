@@ -1,22 +1,12 @@
 import AWS from 'aws-sdk';
-//require('dotenv').config();
+import { DYNAMO_config } from './constants.js'
 
 class DynamoDBHandler {
   
   constructor() {
-    this.dynamodb = new AWS.DynamoDB.DocumentClient({ region: 'eu-west-2' });
+    this.dynamodb = new AWS.DynamoDB.DocumentClient(DYNAMO_config);
     this.tableName = 'tasklist'
   }
-
-  // static createInstance() {
-  //   if (!this.#hasInstance()) {
-  //     this.dynamodb = new AWS.DynamoDB.DocumentClient({ region: 'eu-west-2' });
-  //   } 
-  // }
-
-  // #hasInstance() {
-  //   return !!this.dynamodb
-  // }
 
   getTasks = async () => {
     var params = {
@@ -30,7 +20,7 @@ class DynamoDBHandler {
       return result;
     }
     catch (error) {
-      throw new ErrorResponse('Can\'t get data', 500)
+      throw new Error('Can\'t get data', 500)
     }
   }
 
@@ -87,7 +77,7 @@ class DynamoDBHandler {
     }
   }
 
-const DynamoDBInstance = new DynamoDBHandler();
+const DynamoDBInstance = new DynamoDBHandler({region: 'eu-west-2'});
 
 Object.freeze(DynamoDBInstance);
 export default DynamoDBInstance;
