@@ -1,14 +1,20 @@
 import AWS from 'aws-sdk';
-import { DYNAMO_config } from './constants.js'
+require('dotenv').config();
 
 class DynamoDBHandler {
   
   constructor() {
-    this.dynamodb = new AWS.DynamoDB.DocumentClient(DYNAMO_config);
+    this.dynamodb = new AWS.DynamoDB.DocumentClient({
+      region: process.env.AWS_DYNAMO_REGION,
+      accessKeyId: process.env.AWS_DYNAMO_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_DYNAMO_SECRET_ACCESS_KEY,
+  });
     this.tableName = 'tasklist'
   }
 
+
   getTasks = async () => {
+
     var params = {
       TableName: this.tableName
     };
@@ -77,7 +83,7 @@ class DynamoDBHandler {
     }
   }
 
-const DynamoDBInstance = new DynamoDBHandler({region: 'eu-west-2'});
+  const DynamoDBInstance = new DynamoDBHandler();
 
 Object.freeze(DynamoDBInstance);
 export default DynamoDBInstance;
