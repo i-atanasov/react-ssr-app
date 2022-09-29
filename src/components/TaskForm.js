@@ -13,10 +13,10 @@ function TaskForm(props) {
       };
 
       const updateParent = () => {
-        setTimeout(() => {
+        //setTimeout(() => {
           props.hasUpdated([1])
           props.setInitialValues({completed: false, duration: 0})
-        }, 500)
+        //}, 500)
         
       }
      

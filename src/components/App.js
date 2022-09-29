@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import RenderTasks from "./RenderTasks";
 import TaskForm from "./TaskForm";
+import Error from "./Error";
 
 const App = () => {
   const [tasks, setTasks] = useState([])
@@ -35,14 +36,20 @@ const App = () => {
     return setInitialValues(taskEdit[0])
   }
 
-  return (
+  if (tasks.length > 0) {
+    return (
       <div className="ui container">
         <h1 >Add Task</h1>
         <TaskForm hasUpdated={hasUpdated} initialValues={initialValues} setInitialValues={setInitialValues} />
         <h1>FT Onboarding</h1>
-        <RenderTasks tasks={tasks} hasUpdated={hasUpdated} handleEdit={handleEdit}/>
+        <RenderTasks tasks={tasks} hasUpdated={hasUpdated} handleEdit={handleEdit} />
       </div>
-  );
+    );
+  } else {
+    return (
+            <Error message={"No tasks to show..."} />        
+    )
+  }
 }
 
 export default App;

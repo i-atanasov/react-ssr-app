@@ -45,7 +45,6 @@ app.post('/', (req, res) => {
 
 app.delete('/task/delete/:id', (req, res) => {
     let {id} = req.params
-    // DynamoDBHandler.createInstance()
     DynamoDBInstance.deleteTask(id);
 })
 
