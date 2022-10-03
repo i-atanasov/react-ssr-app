@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default Error = (props) => {
+export default ErrorHandler = (props) => {
   return (
     <div class="ui active dimmer">
       <div class="ui text loader">

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import RenderTasks from "./RenderTasks";
 import TaskForm from "./TaskForm";
-import Error from "./Error";
+import ErrorHandler from "./ErrorHandler";
 
 const App = () => {
   const [tasks, setTasks] = useState([])
@@ -32,7 +32,7 @@ const App = () => {
   }, [update]);
 
   const handleEdit = (id) => {
-    const taskEdit = tasks.filter(task => task.id == id)
+    const taskEdit = tasks.filter(task => task.id === id)
     return setInitialValues(taskEdit[0])
   }
 
@@ -47,7 +47,7 @@ const App = () => {
     );
   } else {
     return (
-      <Error message={"No tasks to show..."} />        
+      <ErrorHandler message={"No tasks to show..."} />        
     )
   }
 }

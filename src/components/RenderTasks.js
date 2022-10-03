@@ -8,7 +8,7 @@ const RenderTasks = (props) => {
     }
     
     const deleteTask = async (id) => {
-        await fetch(`http://localhost:3080/task/delete/${id}`, { method: 'DELETE' })
+        await fetch(`https://tasklist-react-ssr.herokuapp.com/task/delete/${id}`, { method: 'DELETE' })
             .then(response => {response.json();   
             })
             .then(props.hasUpdated([1]));
