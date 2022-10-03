@@ -47,7 +47,7 @@ const App = () => {
     );
   } else {
     return (
-            <Error message={"No tasks to show..."} />        
+      <Error message={"No tasks to show..."} />        
     )
   }
 }

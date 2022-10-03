@@ -19,14 +19,17 @@ class DynamoDBHandler {
       TableName: this.tableName
     };
 
+    let result = []
+
     try {
-      let result = await this.dynamodb
+      result = await this.dynamodb
         .scan(params)
         .promise();
       return result;
     }
     catch (error) {
-      throw new Error('Can\'t get data', 500)
+      return result;
+      //throw new Error('Can\'t get data', 500)
     }
   }
 

@@ -13,11 +13,8 @@ function TaskForm(props) {
       };
 
       const updateParent = () => {
-        //setTimeout(() => {
           props.hasUpdated([1])
-          props.setInitialValues({completed: false, duration: 0})
-        //}, 500)
-        
+          props.setInitialValues({completed: false, duration: 0})        
       }
      
       const onSubmit = async (formValues) => {
@@ -46,7 +43,6 @@ function TaskForm(props) {
      
       return (
         <Form
-          // prep for edit option
           initialValues={props.initialValues}
           onSubmit={onSubmit}
           //validation
