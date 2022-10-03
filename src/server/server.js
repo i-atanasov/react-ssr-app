@@ -57,5 +57,5 @@ app.post('/update', (req, res) => {
     res.status(200).send({ request: '' })
 })
 
-app.listen(port, (console.log(`App launched at port ${port}`)))
+app.listen(process.env.PORT || port, (console.log(`App launched at port ${port}`)))
 
