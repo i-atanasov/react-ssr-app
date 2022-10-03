@@ -19,7 +19,7 @@ function TaskForm(props) {
      
       const onSubmit = async (formValues) => {
         if (!formValues.id) {
-          const res = await fetch('https://tasklist-react-ssr.herokuapp.com/', {
+          await fetch('https://tasklist-react-ssr.herokuapp.com/', {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -29,7 +29,7 @@ function TaskForm(props) {
             })
           }).then(updateParent())
         } else {
-          const res = await fetch(`https://tasklist-react-ssr.herokuapp.com/update`, {
+          await fetch(`https://tasklist-react-ssr.herokuapp.com/update`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
