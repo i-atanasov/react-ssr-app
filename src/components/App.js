@@ -36,7 +36,7 @@ const App = () => {
     return setInitialValues(taskEdit[0])
   }
 
-  if (tasks.length > 0) {
+  if (tasks) {
     return (
       <div className="ui container">
         <h1 >Add Task</h1>
