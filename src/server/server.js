@@ -8,7 +8,7 @@ import React from 'react'
 import DynamoDBInstance from "./aws";
 //import App from "../components/App";
 
-const port = 3080;
+const port = process.env.PORT || 3080;
 const app = express();
 
 app.use(express.static(path.resolve(__dirname, '../../', 'build')))
