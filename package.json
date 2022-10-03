@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "node src/server/index.js",
-    "build": "react-scripts build && node src/server/index.js",
+    "localbuild": "react-scripts build && node src/server/index.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "ssr": "node src/server/index.js",
