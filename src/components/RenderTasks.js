@@ -11,7 +11,7 @@ const RenderTasks = (props) => {
         await fetch(`https://tasklist-react-ssr.herokuapp.com/task/delete/${id}`, { method: 'DELETE' })
             .then(response => {response.json();   
             })
-            .then(props.hasUpdated([1]));
+            .then(props.hasUpdated([...hasUpdated, 1]));
     }
 
     const renderAdminButtons = (id) => {
