@@ -11,7 +11,7 @@ const App = () => {
 
   useEffect(() => {
     const getTasks = async () => {
-      const data = await fetch('http://localhost:3080/tasks', { method: 'GET' })
+      const data = await fetch('https://tasklist-react-ssr.herokuapp.com/tasks', { method: 'GET' })
         .then(res => {
           if (!res.ok) {
             throw Error(res.statusText)
