@@ -13,7 +13,7 @@ function TaskForm(props) {
   };
 
   const updateParent = () => {
-    props.hasUpdated([...hasUpdated, 1])
+    props.hasUpdated([...props.hasUpdated, 1])
     props.setInitialValues({ completed: false, duration: 0 })
   }
 
